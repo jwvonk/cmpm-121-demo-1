@@ -15,11 +15,12 @@ const mainButton = document.createElement("button");
 mainButton.innerHTML = buttonEmoji;
 app.append(mainButton);
 
-let counter: number = 0;
+let g_counter: number = 0;
 
 function IncrementCounter(step: number) {
-  counter += step;
-  counterElem.innerHTML = `Coconuts: ${counter}`;
+  g_counter += step;
+
+  counterElem.innerHTML = `Coconuts: ${g_counter}`;
 }
 
 const counterElem = document.createElement("div");
@@ -30,4 +31,13 @@ mainButton.addEventListener("click", () => {
   IncrementCounter(1);
 });
 
-setInterval(IncrementCounter, 1000, 1);
+let g_lastCalledTime = performance.now();
+
+requestAnimationFrame(tick);
+
+function tick() {
+  const delta = performance.now() - g_lastCalledTime;
+  g_lastCalledTime = performance.now();
+  IncrementCounter(delta / 1000);
+  requestAnimationFrame(tick);
+}
