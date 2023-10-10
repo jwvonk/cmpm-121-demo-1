@@ -17,15 +17,17 @@ app.append(mainButton);
 
 let counter: number = 0;
 
-function UpdateCounterElem() {
+function IncrementCounter(step: number) {
+  counter += step;
   counterElem.innerHTML = `Coconuts: ${counter}`;
 }
 
 const counterElem = document.createElement("div");
-UpdateCounterElem();
+IncrementCounter(0);
 app.append(counterElem);
 
 mainButton.addEventListener("click", () => {
-  counter++;
-  UpdateCounterElem();
+  IncrementCounter(1);
 });
+
+setInterval(IncrementCounter, 1000, 1);
