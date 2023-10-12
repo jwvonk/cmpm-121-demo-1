@@ -3,8 +3,7 @@ import "./style.css";
 const app: HTMLDivElement = document.querySelector("#app")!;
 
 const gameName = "Coco Clicker";
-const buttonEmoji = "🌴";
-// const upgradeText = "🐵: 10 coconuts";
+const buttonEmoji = `<font size="+4">🌴</font>`;
 
 document.title = gameName;
 
@@ -52,14 +51,32 @@ class Upgrade {
   update() {
     this.button.innerHTML = `${this.text}<br>${this.cost.toFixed(
       2,
-    )} units<br>Owned: ${this.count}`;
+    )} coconuts<br>Owned: ${this.count}`;
   }
 }
 
 const upgrades: Upgrade[] = [
-  new Upgrade(10, 0.1, "Upgrade 1"),
-  new Upgrade(100, 2, "Upgrade 2"),
-  new Upgrade(1000, 50, "Upgrade 3"),
+  new Upgrade(
+    10,
+    0.1,
+    `<font size="+4">🐒</font><br>
+    Monkey<br>
+    <font size="-1">Great at Climbing</font>`,
+  ),
+  new Upgrade(
+    100,
+    2,
+    `<font size="+4">🦍</font><br>
+    Gorilla<br>
+    <font size="-1">Strong Enough to break open coconuts</font>`,
+  ),
+  new Upgrade(
+    1000,
+    50,
+    `<font size="+4">🐘</font><br>
+    Elephant<br>
+    <font size="-1">Able to reach coconuts with their trunks</font>`,
+  ),
 ];
 
 upgrades.forEach((upgrade) => app.append(upgrade.button));
@@ -86,12 +103,12 @@ function tick() {
     (upgrade) => (upgrade.button.disabled = g_counter < upgrade.cost),
   );
 
-  rateElem.innerHTML = `${g_growthRate.toFixed(2)} units/sec`;
+  rateElem.innerHTML = `${g_growthRate.toFixed(2)} coconuts/sec`;
 }
 
 function IncrementCounter(step: number) {
   g_counter += step;
-  counterElem.innerHTML = `${g_counter.toFixed(2)} units`;
+  counterElem.innerHTML = `${g_counter.toFixed(2)} coconuts`;
 }
 
 requestAnimationFrame(tick);
