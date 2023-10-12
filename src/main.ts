@@ -24,6 +24,12 @@ mainButton.addEventListener("click", () => {
   IncrementCounter(1);
 });
 
+interface Item {
+  name: string;
+  cost: number;
+  rate: number;
+}
+
 class Upgrade {
   cost: number;
   rate: number;
@@ -55,29 +61,41 @@ class Upgrade {
   }
 }
 
-const upgrades: Upgrade[] = [
-  new Upgrade(
-    10,
-    0.1,
-    `<font size="+4">🐒</font><br>
-    Monkey<br>
-    <font size="-1">Great at Climbing</font>`,
-  ),
-  new Upgrade(
-    100,
-    2,
-    `<font size="+4">🦍</font><br>
-    Gorilla<br>
-    <font size="-1">Strong Enough to break open coconuts</font>`,
-  ),
-  new Upgrade(
-    1000,
-    50,
-    `<font size="+4">🐘</font><br>
-    Elephant<br>
-    <font size="-1">Able to reach coconuts with their trunks</font>`,
-  ),
+const availableItems: Item[] = [
+  { name: "Monkey", cost: 10, rate: 0.1 },
+  { name: "Gorilla", cost: 100, rate: 2 },
+  { name: "Elephant", cost: 1000, rate: 50 },
 ];
+
+const upgrades: Upgrade[] = [];
+
+availableItems.forEach((item) =>
+  upgrades.push(new Upgrade(item.cost, item.rate, item.name)),
+);
+
+// const upgrades: Upgrade[] = [
+//   new Upgrade(
+//     10,
+//     0.1,
+//     `<font size="+4">🐒</font><br>
+//     Monkey<br>
+//     <font size="-1">Great at Climbing</font>`,
+//   ),
+//   new Upgrade(
+//     100,
+//     2,
+//     `<font size="+4">🦍</font><br>
+//     Gorilla<br>
+//     <font size="-1">Strong Enough to break open coconuts</font>`,
+//   ),
+//   new Upgrade(
+//     1000,
+//     50,
+//     `<font size="+4">🐘</font><br>
+//     Elephant<br>
+//     <font size="-1">Able to reach coconuts with their trunks</font>`,
+//   ),
+// ];
 
 upgrades.forEach((upgrade) => app.append(upgrade.button));
 
