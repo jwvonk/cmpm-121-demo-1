@@ -38,25 +38,28 @@ class Upgrade {
     this.text = text;
     this.count = 0;
     this.button = document.createElement("button");
-    this.updateCount();
+    this.update();
     this.button.disabled = true;
     this.button.addEventListener("click", () => {
       g_counter -= this.cost;
       g_growthRate += this.rate;
       this.count++;
-      this.updateCount();
+      this.cost *= 1.15;
+      this.update();
     });
   }
 
-  updateCount() {
-    this.button.innerHTML = `${this.text}<br>Owned: ${this.count}`;
+  update() {
+    this.button.innerHTML = `${this.text}<br>${this.cost.toFixed(
+      2,
+    )} units<br>Owned: ${this.count}`;
   }
 }
 
 const upgrades: Upgrade[] = [
-  new Upgrade(10, 0.1, "Upgrade 1: 10 units"),
-  new Upgrade(100, 2, "Upgrade 2: 100 units"),
-  new Upgrade(1000, 50, "Upgrade 3: 1000 units"),
+  new Upgrade(10, 0.1, "Upgrade 1"),
+  new Upgrade(100, 2, "Upgrade 2"),
+  new Upgrade(1000, 50, "Upgrade 3"),
 ];
 
 upgrades.forEach((upgrade) => app.append(upgrade.button));
