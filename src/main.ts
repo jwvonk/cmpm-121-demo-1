@@ -28,19 +28,31 @@ interface Item {
   name: string;
   cost: number;
   rate: number;
+  description: string;
+  emoji: string;
 }
 
 class Upgrade {
   cost: number;
   rate: number;
-  text: string;
+  name: string;
+  desc: string;
+  emoji: string;
   count: number;
   button: HTMLButtonElement;
 
-  constructor(cost: number, rate: number, text: string) {
+  constructor(
+    cost: number,
+    rate: number,
+    name: string,
+    desc: string,
+    emoji: string,
+  ) {
     this.cost = cost;
     this.rate = rate;
-    this.text = text;
+    this.name = name;
+    this.desc = desc;
+    this.emoji = emoji;
     this.count = 0;
     this.button = document.createElement("button");
     this.update();
@@ -55,22 +67,59 @@ class Upgrade {
   }
 
   update() {
-    this.button.innerHTML = `${this.text}<br>${this.cost.toFixed(
-      2,
-    )} coconuts<br>Owned: ${this.count}`;
+    this.button.innerHTML = `
+    <font size="+4">${this.emoji}</font><br>
+    ${this.name}<br>
+    ${this.cost.toFixed(0)} coconuts<br>
+    <font size="-1">${this.desc}</font><br>
+    Owned: ${this.count}`;
   }
 }
 
 const availableItems: Item[] = [
-  { name: "Monkey", cost: 10, rate: 0.1 },
-  { name: "Gorilla", cost: 100, rate: 2 },
-  { name: "Elephant", cost: 1000, rate: 50 },
+  {
+    name: "Crab",
+    cost: 10,
+    rate: 0.1,
+    description: "Can rip through coconot with their claws",
+    emoji: "🦀",
+  },
+  {
+    name: "Monkey",
+    cost: 100,
+    rate: 2,
+    description: "Great at climbing palm trees",
+    emoji: "🐒",
+  },
+  {
+    name: "Gorilla",
+    cost: 1000,
+    rate: 40,
+    description: "Strong Enough to break open coconuts",
+    emoji: "🦍",
+  },
+  {
+    name: "Elephant",
+    cost: 10000,
+    rate: 800,
+    description: "Able to reach coconuts with their trunks",
+    emoji: "🐘",
+  },
+  {
+    name: "Sauropod",
+    cost: 100000,
+    rate: 16000,
+    description: "Can uproot palm trees with ease!",
+    emoji: "🦕",
+  },
 ];
 
 const upgrades: Upgrade[] = [];
 
 availableItems.forEach((item) =>
-  upgrades.push(new Upgrade(item.cost, item.rate, item.name)),
+  upgrades.push(
+    new Upgrade(item.cost, item.rate, item.name, item.description, item.emoji),
+  ),
 );
 
 // const upgrades: Upgrade[] = [
