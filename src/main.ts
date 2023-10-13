@@ -81,7 +81,7 @@ const availableItems: Item[] = [
     name: "Crab",
     cost: 10,
     rate: 0.1,
-    description: "Can rip through coconot with their claws",
+    description: "Can rip open coconuts with their claws",
     emoji: "🦀",
   },
   {
